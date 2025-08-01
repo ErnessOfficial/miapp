@@ -8,11 +8,11 @@ import { Loader2 } from 'lucide-react';
 // Firebase imports
 import { auth, googleProvider } from '../firebase';
 import {
-  signInWithPopup,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  sendEmailVerification
+  signInWithPopup
 } from 'firebase/auth';
+
+// reCAPTCHA helper
+import { getRecaptchaToken } from '../recaptcha';
 
 const CODE_VALIDITY_SECONDS = 600; // 10 minutes
 const RESEND_COOLDOWN_SECONDS = 60;
@@ -36,21 +36,63 @@ const RegistrationPage: React.FC = () => {
   const timerIntervalRef = useRef<number>();
   const resendIntervalRef = useRef<number>();
 
-  // --- Stub: email registration logic to replace existing localStorage simulation ---
-  const handleEmailSubmit = (e: FormEvent<HTMLFormElement>) => {
+  // Send code via backend with reCAPTCHA validation
+  const handleEmailSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // TODO: Implement email-based code send via backend or Firebase
-    // e.g., call your /send-code endpoint or Firebase Auth API
+    setError(null);
+    setIsLoading(true);
+    try {
+      const token = await getRecaptchaToken('registration');
+      const response = await fetch('/api/send-code', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, recaptchaToken: token }),
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        setError(data.error || t('registration.sendCodeError'));
+      } else {
+        setSuccess(t('registration.codeSent'));
+        setStep('code');
+      }
+    } catch (err) {
+      console.error('Error sending code:', err);
+      setError(t('registration.sendCodeError'));
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  const handleCodeSubmit = (e: FormEvent<HTMLFormElement>) => {
+  // Verify code via backend with reCAPTCHA
+  const handleCodeSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // TODO: Implement code verification logic
-    // e.g., verify code in your backend or sign in with Firebase
+    setError(null);
+    setIsLoading(true);
+    try {
+      const token = await getRecaptchaToken('verifyCode');
+      const response = await fetch('/api/verify-code', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, code, recaptchaToken: token }),
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        setError(data.error || t('registration.verifyCodeError'));
+      } else {
+        setUser({ fullName: data.fullName, email: data.email });
+        navigate('/dashboard');
+      }
+    } catch (err) {
+      console.error('Error verifying code:', err);
+      setError(t('registration.verifyCodeError'));
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  // --- Google Sign-In handler ---
+  // Google Sign-In handler
   const handleGoogleLogin = async () => {
+    setError(null);
     setIsLoading(true);
     try {
       const result = await signInWithPopup(auth, googleProvider);
@@ -65,6 +107,7 @@ const RegistrationPage: React.FC = () => {
     }
   };
 
+  // Timer and resend cooldown for code step
   useEffect(() => {
     if (step === 'code') {
       const focusTimeout = window.setTimeout(() => codeInputRef.current?.focus(), 100);
@@ -106,26 +149,23 @@ const RegistrationPage: React.FC = () => {
 
         <div aria-live="polite" className="h-6 text-center text-sm font-medium">
           {success && <p className="text-green-600">{success}</p>}
-          {error   && <p className="text-red-600">{error}</p>}
+          {error && <p className="text-red-600">{error}</p>}
         </div>
 
-        {/* Google Sign-In button shown only in email step */}
+        {/* Google Sign-In button */}
         {step === 'email' && (
           <button
             onClick={handleGoogleLogin}
             disabled={isLoading}
             className="w-full mb-4 flex justify-center items-center py-3 px-4 rounded-lg shadow-lg text-lg font-semibold text-white bg-red-600 hover:bg-red-700 focus:outline-none transition duration-200"
           >
-            {isLoading
-              ? <Loader2 className="animate-spin h-5 w-5" />
-              : t('registration.withGoogle')
-            }
+            {isLoading ? <Loader2 className="animate-spin h-5 w-5" /> : t('registration.withGoogle')}
           </button>
         )}
 
+        {/* Email form or Code form */}
         {step === 'email' ? (
-          <form onSubmit={handleEmailSubmit} className="space-y-6">            
-            {/* Inputs for email and submit button here */}
+          <form onSubmit={handleEmailSubmit} className="space-y-6">
             <input
               type="email"
               value={email}
@@ -134,13 +174,16 @@ const RegistrationPage: React.FC = () => {
               required
               className="w-full px-4 py-2 border rounded-lg"
             />
-            <button type="submit" className="w-full py-3 rounded-lg bg-animik-blue text-white font-semibold">
-              {t('registration.sendCode')}
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="w-full py-3 rounded-lg bg-animik-blue text-white font-semibold"
+            >
+              {isLoading ? <Loader2 className="animate-spin h-5 w-5" /> : t('registration.sendCode')}
             </button>
           </form>
         ) : (
           <form onSubmit={handleCodeSubmit} className="space-y-6">
-            {/* Input for code verification */}
             <input
               ref={codeInputRef}
               type="text"
@@ -150,8 +193,12 @@ const RegistrationPage: React.FC = () => {
               required
               className="w-full px-4 py-2 border rounded-lg"
             />
-            <button type="submit" className="w-full py-3 rounded-lg bg-animik-blue text-white font-semibold">
-              {t('registration.verifyCode')}
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="w-full py-3 rounded-lg bg-animik-blue text-white font-semibold"
+            >
+              {isLoading ? <Loader2 className="animate-spin h-5 w-5" /> : t('registration.verifyCode')}
             </button>
             <p className="text-sm text-gray-500">{`${t('registration.resendIn')} ${resendCooldown}s`}</p>
             <p className="text-sm text-gray-500">{`${t('registration.expiresIn')} ${timer}s`}</p>

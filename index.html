@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -6,17 +5,21 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AnImiK - Emotional Support</title>
+
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind Custom Config -->
     <script>
       tailwind.config = {
         theme: {
           extend: {
-            fontFamily: {
-              sans: ['Poppins', 'sans-serif'],
-            },
+            fontFamily: { sans: ['Poppins', 'sans-serif'] },
             colors: {
               'animik-lilac': '#C5B4E3',
               'animik-pink': '#FADADD',
@@ -29,74 +32,61 @@
               'animik-warm-peach': '#F5D5C1',
             },
             keyframes: {
-              'drop-fall': {
-                '0%': { transform: 'translateY(-100px)', opacity: '0' },
-                '50%': { opacity: '1' },
-                '100%': { transform: 'translateY(0)', opacity: '1' },
-              },
-              'ripple': {
-                '0%': { transform: 'scale(0.8)', opacity: '1' },
-                '100%': { transform: 'scale(2.5)', opacity: '0' },
-              },
+              'drop-fall': { '0%': { transform: 'translateY(-100px)', opacity: '0' }, '50%': { opacity: '1' }, '100%': { transform: 'translateY(0)', opacity: '1' } },
+              'ripple':   { '0%': { transform: 'scale(0.8)', opacity: '1' },    '100%': { transform: 'scale(2.5)', opacity: '0' } }
             },
             animation: {
               'drop-fall': 'drop-fall 1s ease-out forwards',
-              'ripple': 'ripple 1.5s ease-out infinite',
+              'ripple':    'ripple 1.5s ease-out infinite'
             }
-          },
-        },
+          }
+        }
       };
     </script>
+
+    <!-- Global Styles -->
     <style>
-      .empathetic-mode-bg {
-        background: linear-gradient(-45deg, #F3EADA, #F5D5C1, #A7C7E7, #C5B4E3);
-        background-size: 400% 400%;
-        animation: gradient 15s ease infinite;
-      }
-      @keyframes gradient {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-      }
-      .particles {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-        z-index: -1;
-      }
-      .particle {
-        position: absolute;
-        background-color: rgba(255, 255, 255, 0.5);
-        border-radius: 50%;
-        animation: float 25s infinite;
-        bottom: -150px;
-      }
-      @keyframes float {
-        0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-        100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
-      }
+      .empathetic-mode-bg { background: linear-gradient(-45deg, #F3EADA, #F5D5C1, #A7C7E7, #C5B4E3); background-size: 400% 400%; animation: gradient 15s ease infinite; }
+      @keyframes gradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+      .particles { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: -1; }
+      .particle { position: absolute; background-color: rgba(255, 255, 255, 0.5); border-radius: 50%; animation: float 25s infinite; bottom: -150px; }
+      @keyframes float { 0% { transform: translateY(0) rotate(0deg); opacity: 1; } 100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; } }
     </style>
-  <script type="importmap">
-{
-  "imports": {
-    "react": "https://esm.sh/react@^19.1.0",
-    "react-dom/": "https://esm.sh/react-dom@^19.1.0/",
-    "react-router-dom": "https://esm.sh/react-router-dom@^7.7.0",
-    "react-i18next": "https://esm.sh/react-i18next@^15.6.0",
-    "react/": "https://esm.sh/react@^19.1.0/",
-    "lucide-react": "https://esm.sh/lucide-react@^0.525.0",
-    "recharts": "https://esm.sh/recharts@^3.1.0",
-    "i18next": "https://esm.sh/i18next@^25.3.2",
-    "i18next-browser-languagedetector": "https://esm.sh/i18next-browser-languagedetector@^8.2.0",
-    "@google/genai": "https://esm.sh/@google/genai@^1.10.0"
-  }
-}
-</script>
-<link rel="stylesheet" href="/index.css">
-</head>
+
+    <!-- Module Imports -->
+    <script type="importmap">
+    {
+      "imports": {
+        "react": "https://esm.sh/react@^19.1.0",
+        "react-dom/": "https://esm.sh/react-dom@^19.1.0/",
+        "react-router-dom": "https://esm.sh/react-router-dom@^7.7.0",
+        "react-i18next": "https://esm.sh/react-i18next@^15.6.0",
+        "react/": "https://esm.sh/react@^19.1.0/",
+        "lucide-react": "https://esm.sh/lucide-react@^0.525.0",
+        "recharts": "https://esm.sh/recharts@^3.1.0",
+        "i18next": "https://esm.sh/i18next@^25.3.2",
+        "i18next-browser-languagedetector": "https://esm.sh/i18next-browser-languagedetector@^8.2.0",
+        "@google/genai": "https://esm.sh/@google/genai@^1.10.0"
+      }
+    }
+    </script>
+
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="/index.css">
+
+    <!-- reCAPTCHA: Site Key Injection -->
+    <script type="module">
+      const siteKey = import.meta.env.VITE_RECAPTCHA_SITE_KEY;
+      // Expose globally
+      window.RECAPTCHA_SITE_KEY = siteKey;
+      // Dynamically load the reCAPTCHA script with your site key
+      const recaptchaScript = document.createElement('script');
+      recaptchaScript.src = `https://www.google.com/recaptcha/api.js?render=${siteKey}`;
+      recaptchaScript.async = true;
+      document.head.appendChild(recaptchaScript);
+    </script>
+
+  </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
