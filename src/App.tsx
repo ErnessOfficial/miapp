@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -24,10 +23,10 @@ function App(): React.ReactNode {
   return (
     <Routes>
       {/* Public routes */}
-      <Route element={<AuthLayout />}>
+      <Route element={<AuthLayout />}> 
         <Route path="/" element={<RegistrationPage />} />
       </Route>
-      
+
       {/* Private routes */}
       <Route element={<AppLayout />}>
         <Route path="/dashboard" element={<DashboardPage />} />
