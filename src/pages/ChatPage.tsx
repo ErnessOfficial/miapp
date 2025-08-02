@@ -1,48 +1,69 @@
-// pages/ChatPage.tsx
-import React, { useState, useEffect } from 'react';
-import ChatInterface from '../components/chat/ChatInterface';
-import { getRecaptchaToken } from '../recaptcha';
+import React, { useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { getRecaptchaToken } from '../../recaptcha';
 
 const ChatPage: React.FC = () => {
-  const [recaptchaToken, setRecaptchaToken] = useState<string>('');
-  const [recaptchaError, setRecaptchaError] = useState<string>('');
+  const { t } = useTranslation();
+  const [input, setInput] = useState('');
+  const [messages, setMessages] = useState<string[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
-  // Obtain reCAPTCHA token for chat actions
   useEffect(() => {
-    const loadToken = async () => {
-      try {
-        const token = await getRecaptchaToken('chat');
-        setRecaptchaToken(token);
-      } catch (err) {
-        console.error('Error obtaining reCAPTCHA token:', err);
-        setRecaptchaError('Error al cargar reCAPTCHA.');
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
+
+  const handleSendMessage = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!input.trim()) return;
+    setIsLoading(true);
+    const token = await getRecaptchaToken('chat');
+    try {
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: input, recaptchaToken: token })
+      });
+      const data = await response.json();
+      if (response.ok) {
+        setMessages(prev => [...prev, `You: ${input}`, `Bot: ${data.reply}`]);
+        setInput('');
+      } else {
+        setMessages(prev => [...prev, `Error: ${data.error}`]);
       }
-    };
-    loadToken();
-  }, []);
-
-  if (recaptchaError) {
-    return (
-      <div className="w-full h-full flex items-center justify-center text-red-600">
-        {recaptchaError}
-      </div>
-    );
-  }
-
-  // Show loading indicator until token is ready
-  if (!recaptchaToken) {
-    return (
-      <div className="w-full h-full flex items-center justify-center text-gray-600">
-        Cargando chat…
-      </div>
-    );
-  }
+    } catch (err) {
+      setMessages(prev => [...prev, t('chat.errorSending')]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center bg-animik-gray p-0 sm:p-4">
-      <ChatInterface recaptchaToken={recaptchaToken} />
+    <div className="flex flex-col h-full p-4">
+      <div className="flex-1 overflow-y-auto space-y-2">
+        {messages.map((msg, idx) => (
+          <div key={idx} className="bg-white p-2 rounded shadow">{msg}</div>
+        ))}
+        <div ref={messagesEndRef} />
+      </div>
+      <form onSubmit={handleSendMessage} className="flex mt-4">
+        <input
+          className="flex-1 border rounded px-2 py-1"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          placeholder={t('chat.placeholder') || 'Type a message...'}
+        />
+        <button
+          type="submit"
+          disabled={isLoading}
+          className="ml-2 px-4 py-1 bg-animik-blue text-white rounded"
+        >
+          {isLoading ? t('chat.sending') : t('chat.send')}
+        </button>
+      </form>
     </div>
   );
 };
 
 export default ChatPage;
+

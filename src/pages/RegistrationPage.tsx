@@ -1,20 +1,15 @@
-// pages/RegistrationPage.tsx
+// src/pages/RegistrationPage.tsx
 import React, { useState, useRef, useEffect, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useUser } from '../context/UserContext';
+import { useUser } from '../../context/UserContext';
 import { useTranslation } from 'react-i18next';
 import { Loader2 } from 'lucide-react';
 
-// Firebase imports
-import { auth, googleProvider } from '../firebase';
-import {
-  signInWithPopup
-} from 'firebase/auth';
+import { auth, googleProvider } from '../../firebase';
+import { signInWithPopup } from 'firebase/auth';
+import { getRecaptchaToken } from '../../recaptcha';
 
-// reCAPTCHA helper
-import { getRecaptchaToken } from '../recaptcha';
-
-const CODE_VALIDITY_SECONDS = 600; // 10 minutes
+const CODE_VALIDITY_SECONDS = 600;
 const RESEND_COOLDOWN_SECONDS = 60;
 
 const RegistrationPage: React.FC = () => {
@@ -28,7 +23,6 @@ const RegistrationPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
-
   const [timer, setTimer] = useState(CODE_VALIDITY_SECONDS);
   const [resendCooldown, setResendCooldown] = useState(RESEND_COOLDOWN_SECONDS);
 
@@ -36,7 +30,6 @@ const RegistrationPage: React.FC = () => {
   const timerIntervalRef = useRef<number>();
   const resendIntervalRef = useRef<number>();
 
-  // Send code via backend with reCAPTCHA validation
   const handleEmailSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError(null);
@@ -63,7 +56,6 @@ const RegistrationPage: React.FC = () => {
     }
   };
 
-  // Verify code via backend with reCAPTCHA
   const handleCodeSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError(null);
@@ -90,7 +82,6 @@ const RegistrationPage: React.FC = () => {
     }
   };
 
-  // Google Sign-In handler
   const handleGoogleLogin = async () => {
     setError(null);
     setIsLoading(true);
@@ -107,7 +98,6 @@ const RegistrationPage: React.FC = () => {
     }
   };
 
-  // Timer and resend cooldown for code step
   useEffect(() => {
     if (step === 'code') {
       const focusTimeout = window.setTimeout(() => codeInputRef.current?.focus(), 100);
@@ -152,7 +142,6 @@ const RegistrationPage: React.FC = () => {
           {error && <p className="text-red-600">{error}</p>}
         </div>
 
-        {/* Google Sign-In button */}
         {step === 'email' && (
           <button
             onClick={handleGoogleLogin}
@@ -163,7 +152,6 @@ const RegistrationPage: React.FC = () => {
           </button>
         )}
 
-        {/* Email form or Code form */}
         {step === 'email' ? (
           <form onSubmit={handleEmailSubmit} className="space-y-6">
             <input
