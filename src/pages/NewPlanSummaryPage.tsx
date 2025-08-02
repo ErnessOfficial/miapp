@@ -2,7 +2,7 @@
 import React, { useEffect, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { useUser } from '../context/UserContext';
+import { useUser } from '../../context/UserContext';
 import { GoogleGenAI } from '@google/genai';
 import { WisdomDrop } from '../types';
 import { Sparkles, Heart, RefreshCw, Sun } from 'lucide-react';
