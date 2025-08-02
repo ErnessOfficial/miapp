@@ -1,7 +1,7 @@
 // src/pages/RegistrationPage.tsx
 import React, { useState, useRef, useEffect, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useUser } from '../../context/UserContext';
+import { useUser } from '../context/UserContext';
 import { useTranslation } from 'react-i18next';
 import { Loader2 } from 'lucide-react';
 
