@@ -1,8 +1,8 @@
 
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { JournalEntry } from '../../types';
-import { useUser } from '../../context/UserContext';
+import { JournalEntry } from '../types';
+import { useUser } from '../context/UserContext';
 import { Palette, Image as ImageIcon, Music, CheckCircle } from 'lucide-react';
 
 interface JournalSummaryProps {

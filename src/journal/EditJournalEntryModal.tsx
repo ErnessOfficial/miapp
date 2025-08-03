@@ -1,8 +1,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useUser } from '../../context/UserContext';
-import { JournalEntry } from '../../types';
+import { useUser } from '../context/UserContext';
+import { JournalEntry } from '../types';
 import { X } from 'lucide-react';
 
 interface EditJournalEntryModalProps {
