@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { JournalEntry, JournalInfluence } from '../../types';
+import { JournalEntry, JournalInfluence } from '../types';
 import EmotionSelectorStep from './steps/EmotionSelectorStep';
 import InfluenceSelectorStep from './steps/InfluenceSelectorStep';
 import FreeTextStep from './steps/FreeTextStep';

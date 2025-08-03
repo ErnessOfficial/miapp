@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { JournalInfluence } from '../../../types';
+import { JournalInfluence } from '../../types';
 
 interface InfluenceSelectorStepProps {
   selectedInfluences: JournalInfluence[];

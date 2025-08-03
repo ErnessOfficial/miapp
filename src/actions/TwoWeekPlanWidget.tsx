@@ -1,8 +1,8 @@
 
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useUser } from '../../context/UserContext';
-import { JournalEntry } from '../../types';
+import { useUser } from '../context/UserContext';
+import { JournalEntry } from '../types';
 import { Heart, Lock, Check, Sparkles, Flag, PlayCircle, BookOpen, MessageCircle, Smile, Wind, Pencil, Award } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
