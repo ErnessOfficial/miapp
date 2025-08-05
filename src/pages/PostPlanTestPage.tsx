@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import{ useUser } from '../../context/UserContext';
+import{ useUser } from '../context/UserContext';
 import { postPlanQuestions } from '../data/postPlanTestData';
 import { Loader2 } from 'lucide-react';
 import { GoogleGenAI, Type } from '@google/genai';

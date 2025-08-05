@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import testData from '../../data/testData';
+import { diagnosticQuestions as testData } from '../data/testData';
 
 const DiagnosticTestPage: React.FC = () => {
   const { t } = useTranslation();

@@ -3,10 +3,10 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FileText, CheckCircle, AlertTriangle, XCircle, Loader2, AlertCircle as AlertCircleError } from 'lucide-react';
-import { useUser } from '../../context/UserContext';
+import { useUser } from '../context/UserContext';
 import { useNavigate } from 'react-router-dom';
-import TwoWeekPlanWidget from '../components/actions/TwoWeekPlanWidget';
-import LecturasRecomendadasWidget from '../components/actions/LecturasRecomendadasWidget';
+import TwoWeekPlanWidget from '../actions/TwoWeekPlanWidget';
+import LecturasRecomendadasWidget from '../actions/LecturasRecomendadasWidget';
 import { GoogleGenAI, Type } from '@google/genai';
 
 interface PlanItem {
