@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { JournalEntry } from '../../types';
 import { ChevronDown, Edit, Trash2 } from 'lucide-react';
-import { useUser } from '../../context/UserContext';
+import { useUser } from '../context/UserContext';
 
 interface JournalHistoryItemProps {
   entry: JournalEntry;

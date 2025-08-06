@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useUser } from '../../context/UserContext';
+import { useUser } from '../context/UserContext';
 import { Feather, Coffee } from 'lucide-react';
 
 interface EmotionalJournalHomeProps {

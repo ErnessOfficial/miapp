@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { useUser } from '../../context/UserContext';
+import { useUser } from '../context/UserContext';
 import MoodTrackerWidget from '../components/MoodTrackerWidget';
 import PersonalizedRecommendations from '../components/PersonalizedRecommendations';
 import { useTranslation } from 'react-i18next';
