@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useUser } from '../../context/UserContext';
+import { useUser } from '../context/UserContext';
 import JournalEntryFlow from '../components/journal/JournalEntryFlow';
 import { JournalEntry } from '../types';
 import { Sparkles, PlusCircle } from 'lucide-react';
