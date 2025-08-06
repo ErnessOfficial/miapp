@@ -1,10 +1,10 @@
 
 import React, { useState, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { WisdomDrop } from '../../types';
+import { WisdomDrop } from '../../../types';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import WisdomDropIntroAnimation from './WisdomDropIntroAnimation';
-import { useUser } from '../../context/UserContext';
+import { useUser } from '../../../context/UserContext';
 
 interface ReflectiveStoryInfographicProps {
   drop: WisdomDrop;

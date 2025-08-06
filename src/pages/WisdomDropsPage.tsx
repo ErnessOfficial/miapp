@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useUser } from '../../context/UserContext';
 import { Droplets } from 'lucide-react';
-import { WisdomDrop } from '../types';
+import { WisdomDrop } from '../../types';
 import ReflectiveStoryInfographic from '../components/wisdom/ReflectiveStoryInfographic';
 
 const WisdomDropsPage: React.FC = () => {

@@ -3,10 +3,10 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { FileText, ArrowRight } from 'lucide-react';
-import { WellbeingHistoryEntry } from '../types';
+import { WellbeingHistoryEntry } from '../../types';
 import ProgressChart from './ProgressChart';
 import ProgressFeedback from './ProgressFeedback';
-import { useUser } from '../context/UserContext';
+import { useUser } from '../../context/UserContext';
 import MotivationalPrompt from './MotivationalPrompt';
 
 const PersonalizedRecommendations: React.FC = () => {

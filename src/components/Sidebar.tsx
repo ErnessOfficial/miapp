@@ -3,7 +3,7 @@ import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { X, LayoutDashboard, MessageSquare, BookOpen, Heart, Target, UserCircle, LogOut, ClipboardList, Droplets } from 'lucide-react';
-import { useUser } from '../context/UserContext';
+import { useUser } from '../../context/UserContext';
 
 interface SidebarProps {
     isOpen: boolean;

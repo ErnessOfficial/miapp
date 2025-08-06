@@ -5,7 +5,7 @@ import{ useUser } from '../../context/UserContext';
 import { postPlanQuestions } from '../data/postPlanTestData';
 import { Loader2 } from 'lucide-react';
 import { GoogleGenAI, Type } from '@google/genai';
-import { WellbeingHistoryEntry, JournalEntry } from '../types';
+import { WellbeingHistoryEntry, JournalEntry } from '../../types';
 import QuestionCard from '../components/test/QuestionCard';
 
 const PostPlanTestPage: React.FC = () => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { WellbeingQuestion, PostPlanQuestion } from '../../types';
+import { WellbeingQuestion, PostPlanQuestion } from '../../../types';
 
 interface QuestionCardProps {
   question: WellbeingQuestion | PostPlanQuestion;

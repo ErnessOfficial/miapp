@@ -4,7 +4,7 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
 import { Menu } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { useUser } from '../context/UserContext';
+import { useUser } from '../../context/UserContext';
 
 const AppLayout: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
