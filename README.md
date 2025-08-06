@@ -9,6 +9,19 @@ This contains everything you need to run your app locally.
 
 1. Install dependencies:
    `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
+2. Configure the following environment variables either in a `.env` file (for local development) or in your deployment environment (e.g., Vercel):
+
+    ```
+    GEMINI_API_KEY=
+    VITE_RECAPTCHA_SITE_KEY=6Ld9W5crAAAAAE98kYT97iKNZx0BNn68WSWKfWUY
+    RECAPTCHA_SECRET_KEY=6Ld9W5crAAAAAH6TWF0HMEn_5vald1B2iouGJMXH
+    VITE_FIREBASE_API_KEY=AIzaSyA1jSsPbZXNoIRpowfzgzTPiVcb5wclzC8
+    VITE_FIREBASE_AUTH_DOMAIN=
+    VITE_FIREBASE_PROJECT_ID=
+    VITE_FIREBASE_STORAGE_BUCKET=
+    VITE_FIREBASE_MESSAGING_SENDER_ID=
+    VITE_FIREBASE_APP_ID=
+    VITE_FIREBASE_MEASUREMENT_ID=
+    ```
 3. Run the app:
    `npm run dev`

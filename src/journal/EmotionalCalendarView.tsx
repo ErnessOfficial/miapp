@@ -1,10 +1,10 @@
 
 import React, { useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useUser } from '../../context/UserContext';
+import { useUser } from '../context/UserContext';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import JournalDetailModal from './JournalDetailModal';
-import { JournalEntry } from '../../types';
+import { JournalEntry } from '../types';
 
 const emotionColors: { [key: string]: string } = {
   neutral: 'bg-gray-300',

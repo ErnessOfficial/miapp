@@ -1,9 +1,9 @@
 
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useUser } from '../../context/UserContext';
+import { useUser } from '../context/UserContext';
 import JournalHistoryItem from './JournalHistoryItem';
-import { JournalEntry } from '../../types';
+import { JournalEntry } from '../types';
 
 interface JournalHistoryListProps {
   onEditEntry: (entry: JournalEntry) => void;

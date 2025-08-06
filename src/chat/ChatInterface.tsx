@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { ChatMessage } from '../../types';
+import { ChatMessage } from '../types';
 import ChatWindow from './ChatWindow';
 import CalmingModal from './CalmingModal';
 import { Bot, Send, Sparkles, Leaf } from 'lucide-react';
