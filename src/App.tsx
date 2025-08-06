@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import RegistrationPage from './pages/RegistrationPage';
 import DashboardPage from './pages/DashboardPage';
@@ -23,8 +23,8 @@ function App(): React.ReactNode {
   return (
     <Routes>
       {/* Public routes */}
-      <Route element={<AuthLayout />}> 
-        <Route path="/" element={<RegistrationPage />} />
+      <Route element={<AuthLayout />}>
+        <Route index element={<RegistrationPage />} />
       </Route>
 
       {/* Private routes */}
@@ -38,6 +38,7 @@ function App(): React.ReactNode {
         <Route path="/journal" element={<EmotionalJournalPage />} />
         <Route path="/wisdom-drops" element={<WisdomDropsPage />} />
       </Route>
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 }
