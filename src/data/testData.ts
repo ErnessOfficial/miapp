@@ -1,5 +1,5 @@
 
-import { WellbeingQuestion } from '../types';
+import { WellbeingQuestion } from '../../types';
 
 export const diagnosticQuestions: WellbeingQuestion[] = [
   { id: 1, questionKey: 'q1', options: [ { textKey: 'a', score: 4 }, { textKey: 'b', score: 3 }, { textKey: 'c', score: 2 }, { textKey: 'd', score: 1 } ] },

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import testData from '../../data/testData';
+import { diagnosticQuestions } from '../data/testData';
 
 const DiagnosticTestPage: React.FC = () => {
   const { t } = useTranslation();
-  const [answers, setAnswers] = useState<(string | null)[]>(Array(testData.length).fill(null));
+  const [answers, setAnswers] = useState<(string | null)[]>(Array(diagnosticQuestions.length).fill(null));
   const [submitted, setSubmitted] = useState(false);
 
   const handleAnswerChange = (index: number, value: string) => {
@@ -22,7 +22,7 @@ const DiagnosticTestPage: React.FC = () => {
     <div className="max-w-3xl mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">{t('diagnostic.title')}</h1>
       <form onSubmit={handleSubmit} className="space-y-6">
-        {testData.map((question, idx) => (
+        {diagnosticQuestions.map((question, idx) => (
           <div key={idx} className="space-y-2">
             <p className="font-semibold">{t(`diagnostic.questions.${question.id}`)}</p>
             <div className="flex gap-4">

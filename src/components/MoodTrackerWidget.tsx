@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { MoodEntry } from '../types';
+import { MoodEntry } from '../../types';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { useTranslation } from 'react-i18next';
 

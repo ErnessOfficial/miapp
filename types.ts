@@ -1,9 +1,10 @@
 
 export interface User {
   fullName: string;
-  age: number | string;
-  gender: string;
-  country: string;
+  email: string;
+  age?: number | string;
+  gender?: string;
+  country?: string;
 }
 
 export interface MoodEntry {

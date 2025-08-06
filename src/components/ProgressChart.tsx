@@ -1,6 +1,6 @@
 import React from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Dot } from 'recharts';
-import { WellbeingHistoryEntry } from '../types';
+import { WellbeingHistoryEntry } from '../../types';
 import { useTranslation } from 'react-i18next';
 
 interface ProgressChartProps {

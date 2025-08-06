@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { WellbeingHistoryEntry } from '../types';
+import { WellbeingHistoryEntry } from '../../types';
 
 interface ProgressFeedbackProps {
   history: WellbeingHistoryEntry[];
