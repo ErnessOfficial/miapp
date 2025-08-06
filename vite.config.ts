@@ -27,6 +27,12 @@ export default defineConfig(({ mode }) => {
     server: {
       port: Number(env.VITE_PORT) || 3000,
       strictPort: true,
+      proxy: {
+        '/api': {
+          target: env.VITE_API_URL || 'http://localhost:5001',
+          changeOrigin: true,
+        }
+      }
     },
 
     // Alias de importaciones para rutas más limpias
