@@ -3,7 +3,7 @@
 // Import only the Firebase SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
-import { getAnalytics } from "firebase/analytics";
+import { getAnalytics, isSupported } from "firebase/analytics";
 
 // Firebase configuration loaded from environment variables
 const firebaseConfig = {
@@ -16,11 +16,33 @@ const firebaseConfig = {
   measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
 
+// Ensure required Firebase configuration values are present
+const requiredFields = {
+  apiKey: firebaseConfig.apiKey,
+  authDomain: firebaseConfig.authDomain,
+  projectId: firebaseConfig.projectId,
+  appId: firebaseConfig.appId,
+};
+
+const missingFields = Object.entries(requiredFields)
+  .filter(([_, value]) => !value)
+  .map(([key]) => key);
+
+if (missingFields.length) {
+  throw new Error(`Missing Firebase configuration values: ${missingFields.join(", ")}`);
+}
+
 // Initialize Firebase app
 const app = initializeApp(firebaseConfig);
 
 // Initialize Analytics (optional)
-const analytics = getAnalytics(app);
+if (firebaseConfig.measurementId) {
+  isSupported().then(supported => {
+    if (supported) {
+      getAnalytics(app);
+    }
+  });
+}
 
 // Initialize Authentication and Google provider
 export const auth = getAuth(app);

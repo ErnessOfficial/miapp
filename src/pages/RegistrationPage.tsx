@@ -5,7 +5,7 @@ import { useUser } from '../context/UserContext';
 import { useTranslation } from 'react-i18next';
 import { Loader2 } from 'lucide-react';
 
-import { auth, googleProvider } from '../../firebase';
+import { auth, googleProvider } from '../firebase';
 import { signInWithPopup } from 'firebase/auth';
 import { getRecaptchaToken } from '../../recaptcha';
 
