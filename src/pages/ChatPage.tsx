@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { getRecaptchaToken } from '../../recaptcha';
+import { getRecaptchaToken } from '../recaptcha';
 
 const ChatPage: React.FC = () => {
   const { t } = useTranslation();
