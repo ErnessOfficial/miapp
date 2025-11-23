@@ -7,7 +7,7 @@ import { Loader2 } from 'lucide-react';
 
 import { auth, googleProvider } from '../../firebase';
 import { signInWithPopup } from 'firebase/auth';
-import { getRecaptchaToken } from '../../recaptcha';
+import { getRecaptchaToken } from '../recaptcha';
 
 const CODE_VALIDITY_SECONDS = 600;
 const RESEND_COOLDOWN_SECONDS = 60;

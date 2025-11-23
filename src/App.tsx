@@ -12,6 +12,13 @@ import EmotionalJournalPage from './pages/EmotionalJournalPage';
 import PostPlanTestPage from './pages/PostPlanTestPage';
 import NewPlanSummaryPage from './pages/NewPlanSummaryPage';
 import WisdomDropsPage from './pages/WisdomDropsPage';
+import AdminGuard from './admin/components/AdminGuard';
+import AdminLayout from './admin/layouts/AdminLayout';
+import AdminLoginPage from './admin/pages/AdminLoginPage';
+import AdminDashboardPage from './admin/pages/AdminDashboardPage';
+import SchoolManagementPage from './admin/pages/SchoolManagementPage';
+import LicenseManagementPage from './admin/pages/LicenseManagementPage';
+import AdminLogsPage from './admin/pages/AdminLogsPage';
 
 function App(): React.ReactNode {
   const { i18n } = useTranslation();
@@ -37,6 +44,17 @@ function App(): React.ReactNode {
         <Route path="/new-plan-summary" element={<NewPlanSummaryPage />} />
         <Route path="/journal" element={<EmotionalJournalPage />} />
         <Route path="/wisdom-drops" element={<WisdomDropsPage />} />
+      </Route>
+
+      {/* Admin routes */}
+      <Route path="/admin/login" element={<AdminLoginPage />} />
+      <Route element={<AdminGuard />}>
+        <Route element={<AdminLayout />}>
+          <Route path="/admin" element={<AdminDashboardPage />} />
+          <Route path="/admin/schools" element={<SchoolManagementPage />} />
+          <Route path="/admin/licenses" element={<LicenseManagementPage />} />
+          <Route path="/admin/logs" element={<AdminLogsPage />} />
+        </Route>
       </Route>
     </Routes>
   );
